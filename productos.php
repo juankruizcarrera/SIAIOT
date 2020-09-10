@@ -6,88 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SIAPLUS</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i%7CRajdhani:400,600,700"
-        rel="stylesheet">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/loader/loaders.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/font-awesome/font-awesome.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/aos/aos.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/swiper/swiper.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/lightgallery.min.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/style.css">
-    <link rel="stylesheet" href="SIA WEB/Presentacion/assets/css/responsive.css">
+    <?php include("includes/referencias.php"); ?>
 </head>
 
 <body>
     <div class="css-loader">
         <div class="loader-inner line-scale d-flex align-items-center justify-content-center"></div>
     </div>
-    <header class="position-absolute w-100">
-        <div class="container">
-            <div class="top-header d-none d-sm-flex justify-content-between align-items-center">
-                <div class="contact">
-                    <a href="tel:(+593) 979889789" class="tel"><i class="fa fa-phone" aria-hidden="true"></i>(+593)979889789</a>
-                    <a href="SIA WEB/Presentacion/ventas@solinfo.ec"><i class="fa fa-envelope"
-                            aria-hidden="true"></i>ventas@solinfo.ec</a>
-                </div>
-                <nav class="d-flex aic">
-                    <a href="SIA WEB/Presentacion/login.html" class="login"><i class="fa fa-user" aria-hidden="true"></i>INICIAR SESIÓN</a>
-                    <ul class="nav social d-none d-md-flex">
-                        <li><a href="https://www.facebook.com/solinfoTI/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.instagram.com/solinfo2011/"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://api.whatsapp.com/send?1=es&phone=593979889789&text=Buen%20d%c3%ada,%20deseo%20hacer%20una%20compra"><i class="fa fa-whatsapp"></i></a></li>
-                    </ul>
-                </nav>
-            </div>
-            <nav class="navbar navbar-expand-md navbar-light">
-                <a class="navbar-brand" href="SIA WEB/Presentacion/index.html"><img src="SIA WEB/Presentacion/assets/images/logo.png" alt="Multipurpose"></a>                
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="SIA WEB/Presentacion/Productos.html">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SIA WEB/Presentacion/Industrias.html">Industrias</a></li>
-                        <li class="nav-item"><a class="nav-link" href="SIA WEB/Presentacion/Contactenos.html">Contáctenos</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 offset-md-1 col-md-11">
-                    <div class="swiper-container hero-slider">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide slide-content d-flex align-items-center">
-                                <div class="single-slide">
-                                    <img src="SIA WEB/Presentacion/assets/images/Agricultura-tec1.jpg" height="500px" >
-                                </div>
-                            </div>
-                            <div class="swiper-slide slide-content d-flex align-items-center">
-                                <div class="single-slide">
-                                    <img src="SIA WEB/Presentacion/assets/images/Agricultura-tec2.jpg" height="500px" >
-                                </div>
-                            </div>
-                            <div class="swiper-slide slide-content d-flex align-items-center">
-                                <div class="single-slide">
-                                    <img src="SIA WEB/Presentacion/assets/images/Agricultura4.jpg" height="500px" >
-                                </div>
-                            </div>
-                            <div class="swiper-slide slide-content d-flex align-items-center">
-                                <div class="single-slide">
-                                    <img src="SIA WEB/Presentacion/assets/images/Agricultura5.jpg" height="500px" >
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <span class="arr-left"><i class="fa fa-angle-left"></i></span>
-            <span class="arr-right"><i class="fa fa-angle-right"></i></span>
-        </div>
-        <div class="texture"></div>
-        <div class="diag-bg"></div>
-    </section>
+    <?php include("includes/menu.php"); ?>
+	<?php include("includes/slider.php"); ?>
+    
     <section class="cta" data-aos="fade-up" data-aos-delay="0">
         <div class="container">
             <div class="cta-content d-xl-flex align-items-center justify-content-around text-center text-xl-left">
@@ -185,13 +113,7 @@
             </div>
         </div>
     </footer>
-    <script src="SIA WEB/Presentacion/assets/js/jquery-3.3.1.js"></script>
-    <script src="SIA WEB/Presentacion/assets/js/bootstrap.bundle.js"></script>
-    <script src="SIA WEB/Presentacion/assets/js/loaders.css.js"></script>
-    <script src="SIA WEB/Presentacion/assets/js/aos.js"></script>
-    <script src="SIA WEB/Presentacion/assets/js/swiper.min.js"></script>
-    <script src="SIA WEB/Presentacion/assets/js/lightgallery-all.min.js"></script>
-    <script src="SIA WEB/Presentacion/assets/js/main.js"></script>
+ 
 </body>
 
 </html>

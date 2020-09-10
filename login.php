@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIA PLUS</title>
-<link rel="stylesheet" type="text/css" href="SIA WEB/Presentacion/assets/css/stylelogin.css">
+<link rel="stylesheet" type="text/css" href="assets/css/stylelogin.css">
 </head>
 <body>
 

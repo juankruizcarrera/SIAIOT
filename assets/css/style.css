@@ -164,7 +164,7 @@ form button.btn-primary:hover {
     1 - Hero
 ------------------------------------*/
 .hero {
-  background: url("../../SIA WEB/Presentacion/assets/images/hero-bg.jpg") no-repeat center;
+  background: url("../images/hero-bg.jpg") no-repeat center;
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -250,7 +250,7 @@ form button.btn-primary:hover {
 .hero .texture {
   width: 100%;
   height: 100%;
-  background: url("../../SIA WEB/Presentacion/assets/images/hero-texture.png") no-repeat center;
+  background: url("../images/hero-texture.png") no-repeat center;
   background-size: cover;
   opacity: 0.4;
   position: absolute;
@@ -655,7 +655,7 @@ form button.btn-primary:hover {
     1 - Testimonials
 ------------------------------------*/
 .testimonial-and-clients {
-  background: url(../../SIA%20WEB/Presentacion/assets/images/test-clients-bg.png) center center/cover no-repeat #ee1515;
+  background: url(../images/test-clients-bg.png) center center/cover no-repeat #ee1515;
 }
 
 .testimonials {
@@ -745,7 +745,7 @@ form button.btn-primary:hover {
     1 - Footer
 ------------------------------------*/
 footer {
-  background: url(../../SIA%20WEB/Presentacion/assets/images/footer-bg.png) center center/cover no-repeat #26264b;
+  background: url(..images/footer-bg.png) center center/cover no-repeat #26264b;
 }
 
 /*-----------------------------------

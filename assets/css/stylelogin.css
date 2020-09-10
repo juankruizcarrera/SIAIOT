@@ -9,7 +9,7 @@ body{
 }
 
 .login-page{
-	background-image: url('../../SIA WEB/Presentacion/assets/images/Agricultura.jpg');
+	background-image: url("../images/Agricultura.jpg");
 	background-size: cover;
 	height: 100vh;
 	position: relative;
