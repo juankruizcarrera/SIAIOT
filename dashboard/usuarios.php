@@ -47,8 +47,8 @@ if(!isset($_SESSION["session_username"])) {
      <div class="card">
         <div class="card-header">
           <h3 class="card-title">Usuarios</h3>
-          <a class="btn btn-success btn-sm" href="#">
-                            <i class="fas fa-trash">
+          <a class="btn btn-success btn-sm" href="nuevoUsuario.php">
+                            <i class="fas fa-plus">
                             </i>
                             Nuevo
                         </a>
