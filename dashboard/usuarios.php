@@ -46,8 +46,12 @@ if(!isset($_SESSION["session_username"])) {
      <!-- Default box -->
      <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Projects</h3>
-
+          <h3 class="card-title">Usuarios</h3>
+          <a class="btn btn-success btn-sm" href="#">
+                            <i class="fas fa-trash">
+                            </i>
+                            Nuevo
+                        </a>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
@@ -105,11 +109,7 @@ if(!isset($_SESSION["session_username"])) {
                     </td>
                    
                     <td class="project-actions text-right">
-                        <a class="btn btn-primary btn-sm" href="#">
-                            <i class="fas fa-folder">
-                            </i>
-                            Ver
-                        </a>
+                       
                         <a class="btn btn-info btn-sm" href="#">
                             <i class="fas fa-pencil-alt">
                             </i>
