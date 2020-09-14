@@ -8,7 +8,7 @@
 </head>
 <body>
 <section class="login-page">
-  <form>
+  <form method="get">
     <div class="box">
       <div class="form-head">
         <h2>INICIO DE SESIÓN</h2>
@@ -23,6 +23,33 @@
     </div>
   </form>
 
+<?php 
+session_start();
+if(isset($_SESSION["session_username"])){
+  // echo "La sesión está puesta"; // para testeo
+  header("Location: dashboard");
+  }
+
+if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
+  $data = json_decode(file_get_contents("http://localhost:8080/SiaApi/usuario.php"),true);
+  $cont=$_GET['txtPass'];
+  $usu=$_GET['txtUsuario'];
+  for($i=0;$i<count($data); $i++){
+    
+    if ($data[$i]["conUsu"]==$cont && $data[$i]["emaUsu"]==$usu ) {
+    
+      $_SESSION['session_username']=$usu;
+
+      /* Redireccionar el navegador */
+      header("Location: dashboard");
+      die();
+    }
+  break;
+  }
+    
+}
+
+?>
 </section>
 </body>
 </html>
