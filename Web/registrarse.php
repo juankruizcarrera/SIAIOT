@@ -26,12 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <link rel="stylesheet" type="text/css" href="assets/css/stylelogin.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap" defer></script>
 <?php include "includes/referencias.php";?>
 <style type="text/css">
-	#regiration_form fieldset:not(:first-of-type) {
-		display: none;
-	}
+
+  #map {
+        height: 100%;
+      }
   </style>
   
 </head>
@@ -49,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     <div class="form-body">
       <fieldset>
-      <h1>Datos del Usuario</h1>
+      <h2>Datos del Usuario</h2>
         <input type="text"  id="txtNom" name="txtNom" placeholder="Nombre(s)"/>
         <input type="text"  id="txtApe" name="txtApe" placeholder="Apellido(s)"/>
         <input type="text"  id="txtCorreo" name="txtCorreo" placeholder="Correo"/>
@@ -59,9 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       </fieldset>
 
       <fieldset>
-          <h1>Datos de la Granja</h1>
-          <h1>Ubicacion </h1>
-          <select class="combo custom-select" id="tipoGranja"name="tipoGranja" >
+          <h2>Datos de la Granja</h2>
+          <h2>Ubicacion </h2>
+          <div id="map"></div>
+          
+          <select class="custom-select" id="tipoGranja"name="tipoGranja" >
           <option selected>Tipo Granja</option>
             <?php
              for($i=0;$i<count($tipoGran); $i++){
@@ -71,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
              } 
             ?>
           </select>
-       
+         <br>
           <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
           <button type="submit" name="next" class=" btn btn-info">Guardar</button>
           </fieldset>
@@ -85,6 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </body>
 </html>
 <script type="text/javascript">
+
+
 $(document).ready(function(){
 	var current = 1,current_step,next_step,steps;
 	steps = $("fieldset").length;
@@ -112,4 +118,61 @@ $(document).ready(function(){
 			.html(percent+"%");
 	}
 });
+//mapa 
+
 </script>
+<script>
+
+       var marker; 
+initMap = function() {
+   navigator.geolocation.getCurrentPosition(
+    function(position) {
+      coords = {
+        lng: position.coords.longitude,
+        lat: position.coords.latitude
+      };
+      setMapa(coords);  
+           
+    },
+    function(error) {
+      console.log(error);
+    });
+
+}
+
+function setMapa(coords) {
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 20,
+    center: new google.maps.LatLng(coords.lat, coords.lng),
+
+  });
+
+  marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: new google.maps.LatLng(coords.lat, coords.lng),
+
+  });
+ 
+  marker.addListener('click', toggleBounce);
+
+  marker.addListener('dragend', function(event) {
+    
+    document.getElementById("campoLatitud").value = this.getPosition().lat();
+    document.getElementById("campoLongitud").value = this.getPosition().lng();
+  });
+}
+
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+
+    </script>

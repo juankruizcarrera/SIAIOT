@@ -1,13 +1,13 @@
 <?php
 //echo dirname( __FILE__ );
-require_once (dirname(__FILE__).'/Datos/datosUsuario.php');
+require_once (dirname(__FILE__).'/Datos/datosGranja.php');
 switch ($_SERVER['REQUEST_METHOD']) {
   case 'GET':
       if(isset($_GET['id'])) {
       
-          print_r(getUsuariosId($_GET['id']));
+          print_r(getGranjaId($_GET['id']));
       }else{
-          print_r(getUsuarios());
+          print_r(getGranja());
       }
       break;
       case 'POST':
@@ -17,7 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $emaUsu = $_GET['emaUsu'];
             $fecCreUsu = $_GET['fecCreUsu'];
             $idGraPer = $_GET['idGraPer'];
-            $var = setUsuarios($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer);
+            $var = setGranja($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer);
            if ($var>0) {
             echo "successful";
            }else {
@@ -31,7 +31,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             $emaUsu = $_GET['emaUsu'];
             $fecCreUsu = $_GET['fecCreUsu'];
             $idGraPer = $_GET['idGraPer'];
-            $var = putUsuarios($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer,$id);
+            $var = putGranja($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer,$id);
            if ($var>0) {
             echo "successful";
            }else {

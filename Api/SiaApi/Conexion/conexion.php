@@ -15,7 +15,7 @@ if($conexion -> connect_errno){
 
 
 //metodos
-function ObtenerUsuarios($sqlstr, $conexion = null){
+function Obtener($sqlstr, $conexion = null){
     if(!$conexion)global $conexion;
     $result = $conexion ->query($sqlstr);
     $resulArray = array();
@@ -32,17 +32,9 @@ function InsertDeleteUpdate($sqlstr, $conexion = null){
    
     }
 
-//tipo de granja 
-function ObtenerTipoGranja($sqlstr, $conexion = null){
-    if(!$conexion)global $conexion;
-    $result = $conexion ->query($sqlstr);
-    $resulArray = array();
-    foreach( $result as $registros ){
-    $resulArray[] = $registros;
-    }
-    return $resulArray;
-    
-}
+
+//granja
+
 
 //transforma a utf-8
 function ConvertirUTF8($array){

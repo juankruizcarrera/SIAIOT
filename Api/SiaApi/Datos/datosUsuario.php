@@ -4,13 +4,13 @@ require_once dirname( __DIR__ ).'/Conexion/conexion.php';
 
 function getUsuarios(){
     $Query = "select * from usuario";
-    $Respuesta = ObtenerUsuarios($Query);
+    $Respuesta = Obtener($Query);
     return json_encode(ConvertirUTF8($Respuesta));
 }
 
 function getUsuariosId($id){
     $Query = "select * from usuario where idUsu = $id";
-    $Respuesta = ObtenerUsuarios($Query);
+    $Respuesta = Obtener($Query);
     return json_encode(ConvertirUTF8($Respuesta));
 }
 function setUsuarios($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer){
