@@ -23,3 +23,4 @@
     <script src="assets/js/lightgallery-all.min.js"></script>
     <!--Template Script-->
     <script src="assets/js/main.js"></script>
+  
