@@ -26,66 +26,119 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <link rel="stylesheet" type="text/css" href="assets/css/stylelogin.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap" defer></script>
-<?php include "includes/referencias.php";?>
-<style type="text/css">
 
-  #map {
-        height: 100%;
-      }
-  </style>
+<?php include "includes/referencias.php";?>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap&libraries=&v=weekly" defer ></script>
+
+  <script>
+ "use strict";
+
+// This example creates a simple polygon representing the Bermuda Triangle. Note
+// that the code specifies only three LatLng coordinates for the polygon. The
+// API automatically draws a stroke connecting the last LatLng back to the first
+// LatLng.
+ let triangleCoords = [];
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 5,
+    center: {
+      lat: 24.886,
+      lng: -70.268
+    },
+    mapTypeId: "terrain"
+  }); // Define the LatLng coordinates for the polygon's path. Note that there's
+  // no need to specify the final coordinates to complete the polygon, because
+  // The Google Maps JavaScript API will automatically draw the closing side.
+ 
+    const bermudaTriangle = new google.maps.Polygon({
+    paths: triangleCoords,
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 3,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35
+  });
+map.addListener("click", event => {
+    addMarker(event.latLng);
+    //console.log(event.latLng.lat(),event.latLng.lng())
+    triangleCoords.push({lat:event.latLng.lat(), lng:event.latLng.lng()})
+    console.log(triangleCoords)
+     
+  });
+  function addMarker(location) {
+  const marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+  bermudaTriangle.setMap(map);
+} // Sets
+  
+
+ 
+}
+    </script>
   
 </head>
 <body>
 
-<div class=" login-page" >
+<div class=" login-page"  >
+
 <div class="box">
+
     <div class="form-head">
         <h2>SIA PLUS</h2>
    </div>
    <div class="progress">
   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
-  <form method="get" id="regiration_form" novalidate>
 
-    <div class="form-body">
+  <form method="get" id="regiration_form" novalidate>
+ 
+    <div class="form-body" >
+   
       <fieldset>
       <h2>Datos del Usuario</h2>
-        <input type="text"  id="txtNom" name="txtNom" placeholder="Nombre(s)"/>
-        <input type="text"  id="txtApe" name="txtApe" placeholder="Apellido(s)"/>
-        <input type="text"  id="txtCorreo" name="txtCorreo" placeholder="Correo"/>
-        <input type="password" id="txtPass" name="txtPass" placeholder="Contraseña"/>
+      
+        <input type="text"  id="txtNom" name="txtNom" placeholder="NOMBRE(s)"/>
+        <input type="text"  id="txtApe" name="txtApe" placeholder="APELLIDO(s)"/>
+        <input type="text"  id="txtCorreo" name="txtCorreo" placeholder="CORREO"/>
+        <input type="password" id="txtPass" name="txtPass" placeholder="CONTRASEÑA"/>
         
           <button type="button" name="next" class="next btn btn-info">Siguiente</button>
       </fieldset>
 
       <fieldset>
           <h2>Datos de la Granja</h2>
-          <h2>Ubicacion </h2>
+          <h4 >Marque la ubicación de la granja </h4>
           <div id="map"></div>
-          
-          <select class="custom-select" id="tipoGranja"name="tipoGranja" >
-          <option selected>Tipo Granja</option>
+            <br>
+          <input type="text"  id="txtNomGra" name="txtNomGra" placeholder="NOMBRE GRANJA"/>
+          <select class="custom-select orderby" id="tipoGranja"name="tipoGranja" >
+          <option selected > SELECCIONE TIPO GRANJA</option>
             <?php
              for($i=0;$i<count($tipoGran); $i++){
               ?> 
-               <option><?php echo $tipoGran[$i]["nomTipGra"]; ?></option>
+               <option ><?php echo $tipoGran[$i]["nomTipGra"]; ?></option>
             <?php
              } 
             ?>
           </select>
          <br>
           <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
-          <button type="submit" name="next" class=" btn btn-info">Guardar</button>
+          <button type="submit" name="" class=" btn btn-info">Guardar</button>
           </fieldset>
 
         
     </div>
+    
   </form>
+
     </div>
   </div>
-
+ 
 </body>
 </html>
 <script type="text/javascript">
@@ -118,61 +171,6 @@ $(document).ready(function(){
 			.html(percent+"%");
 	}
 });
-//mapa 
+
 
 </script>
-<script>
-
-       var marker; 
-initMap = function() {
-   navigator.geolocation.getCurrentPosition(
-    function(position) {
-      coords = {
-        lng: position.coords.longitude,
-        lat: position.coords.latitude
-      };
-      setMapa(coords);  
-           
-    },
-    function(error) {
-      console.log(error);
-    });
-
-}
-
-function setMapa(coords) {
-
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 20,
-    center: new google.maps.LatLng(coords.lat, coords.lng),
-
-  });
-
-  marker = new google.maps.Marker({
-    map: map,
-    draggable: true,
-    animation: google.maps.Animation.DROP,
-    position: new google.maps.LatLng(coords.lat, coords.lng),
-
-  });
- 
-  marker.addListener('click', toggleBounce);
-
-  marker.addListener('dragend', function(event) {
-    
-    document.getElementById("campoLatitud").value = this.getPosition().lat();
-    document.getElementById("campoLongitud").value = this.getPosition().lng();
-  });
-}
-
-
-function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
-
-
-    </script>

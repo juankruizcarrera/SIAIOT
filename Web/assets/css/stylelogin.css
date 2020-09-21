@@ -31,7 +31,8 @@ z-index: 1;
 	transform: translate(-50%,-50%);
 	display: flex;
 	flex-direction: column;
-	width: 280px;
+	width: 500px;
+
 	z-index: 2;
 }
 
@@ -45,6 +46,11 @@ color:#ffffff;
 	margin:10px 0px 20px;
 	color:#ffffff;
 	}
+	.login-page .box .form-body h4{
+		text-align: center;
+		margin:10px 0px 20px;
+		color:#ffffff;
+		}
 .login-page .box .form-body{
 display: flex;
 flex-direction: column;
@@ -60,7 +66,7 @@ text-align: center;
 color:#ffffff;
 transition:box-shadow .5s ease;
 }
-.login-page .box .form-body .custom-select option{
+.login-page .box .form-body .custom-select {
 	height: 40px;
 	margin-bottom: 20px;
 	border:1px solid #ffffff;
@@ -108,6 +114,20 @@ transition:box-shadow .5s ease;
     display: none;
   }
 
-  
+  #map {
+	height: 100%;
+	width: 100%;
+  }
+ 
+.box ,#regiration_form, .form-body {
+height: 70%;
+
+}
+.orderby {
+text-align-last: center;
+}
+h4{
+color:#ffffff;
+}
 
 
