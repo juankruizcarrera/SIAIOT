@@ -66,10 +66,21 @@
               <li class="nav-item">
                 <a href="usuarios.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Usuarios</p>
+                  <p>Personal</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="usuarios.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Area de Cultivo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="usuarios.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Actividad de Cultivo</p>
+                </a>
+              </li>
             </ul>
           </li>
         

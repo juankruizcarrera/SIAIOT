@@ -30,56 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php include "includes/referencias.php";?>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap&libraries=&v=weekly" defer ></script>
-
-  <script>
- "use strict";
-
-// This example creates a simple polygon representing the Bermuda Triangle. Note
-// that the code specifies only three LatLng coordinates for the polygon. The
-// API automatically draws a stroke connecting the last LatLng back to the first
-// LatLng.
- let triangleCoords = [];
-function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: {
-      lat: 24.886,
-      lng: -70.268
-    },
-    mapTypeId: "terrain"
-  }); // Define the LatLng coordinates for the polygon's path. Note that there's
-  // no need to specify the final coordinates to complete the polygon, because
-  // The Google Maps JavaScript API will automatically draw the closing side.
- 
-    const bermudaTriangle = new google.maps.Polygon({
-    paths: triangleCoords,
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.8,
-    strokeWeight: 3,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35
-  });
-map.addListener("click", event => {
-    addMarker(event.latLng);
-    //console.log(event.latLng.lat(),event.latLng.lng())
-    triangleCoords.push({lat:event.latLng.lat(), lng:event.latLng.lng()})
-    console.log(triangleCoords)
-     
-  });
-  function addMarker(location) {
-  const marker = new google.maps.Marker({
-    position: location,
-    map: map
-  });
-  bermudaTriangle.setMap(map);
-} // Sets
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap&libraries=drawing" defer ></script>
+  <script src="assets/js/ubicacion.js"></script>
   
-
- 
-}
-    </script>
   
 </head>
 <body>
@@ -114,18 +67,20 @@ map.addListener("click", event => {
           <h2>Datos de la Granja</h2>
           <h4 >Marque la ubicación de la granja </h4>
           <div id="map"></div>
-            <br>
-          <input type="text"  id="txtNomGra" name="txtNomGra" placeholder="NOMBRE GRANJA"/>
-          <select class="custom-select orderby" id="tipoGranja"name="tipoGranja" >
+          <br>
+          <input type="text"  id="nomGra" name="nomGra" placeholder="NOMBRE GRANJA"/>
+          <select class="custom-select orderby" id="idTipGraPer"name="idTipGraPer" >
           <option selected > SELECCIONE TIPO GRANJA</option>
             <?php
              for($i=0;$i<count($tipoGran); $i++){
               ?> 
-               <option ><?php echo $tipoGran[$i]["nomTipGra"]; ?></option>
+               <option  value="<?php echo $tipoGran[$i]["idTipGra"]; ?>"><?php echo $tipoGran[$i]["nomTipGra"]; ?></option>
             <?php
              } 
             ?>
           </select>
+        
+          <input type="text"  id="ubiGra" name="ubiGra"/>
          <br>
           <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
           <button type="submit" name="" class=" btn btn-info">Guardar</button>
@@ -141,6 +96,7 @@ map.addListener("click", event => {
  
 </body>
 </html>
+
 <script type="text/javascript">
 
 
@@ -174,3 +130,30 @@ $(document).ready(function(){
 
 
 </script>
+<?php 
+
+
+if (isset($_POST['nomGra']) && isset($_POST['txtPass'])) {
+  
+  $cont=$_GET['txtPass'];
+  $data = "http://localhost:8080/SiaApi/granja.php?txtNomGra".$txtNomGra;
+  $usu=$_GET['txtUsuario'];
+
+
+  for($i=0;$i<count($data); $i++){
+    
+    if ($data[$i]["conUsu"]==$cont && $data[$i]["emaUsu"]==$usu ) {
+    
+      $_SESSION['session_username']=$usu;
+
+      /* Redireccionar el navegador */
+      header("Location: dashboard");
+      die();
+    }
+  break;
+  }
+
+}
+
+
+?>
