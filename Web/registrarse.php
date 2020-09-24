@@ -133,7 +133,7 @@ $(document).ready(function(){
 <?php 
 
 
-if ($_POST['nomGra']!=""&& $_POST['ubiGra']!=""&&$_POST['idTipGraPer']!="") {
+if ($_POST['nomGra']!=""&& $_POST['ubiGra']!=""&& $_POST['idTipGraPer']!="") {
   $nomGra = $_POST['nomGra'];
   $ubiGra = $_POST['ubiGra'];
   $idTipGraPer = $_POST['idTipGraPer'];
@@ -146,6 +146,6 @@ if ($_POST['nomGra']!=""&& $_POST['ubiGra']!=""&&$_POST['idTipGraPer']!="") {
 	
 	$result = json_decode($response);
 	
-print_r($result);
+  print_r($result);
 }
 ?>
