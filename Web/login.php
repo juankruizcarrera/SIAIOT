@@ -18,8 +18,7 @@ if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
     
     if ($data[$i]["conUsu"]==$cont && $data[$i]["emaUsu"]==$usu ) {
     
-      $_SESSION['session_username']=$usu;
-
+      $_SESSION['session_username']=$data[$i]["idUsu"];
       /* Redireccionar el navegador */
       header("Location: dashboard");
       die();

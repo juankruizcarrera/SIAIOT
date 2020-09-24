@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
-  <form method="get" id="regiration_form" novalidate>
+  <form method="post" id="regiration_form" novalidate>
  
     <div class="form-body" >
    
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ?>
           </select>
         
-          <input type="text"  id="ubiGra" name="ubiGra"/>
+          <input type="hidden"  id="ubiGra" name="ubiGra"/>
          <br>
           <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
           <button type="submit" name="" class=" btn btn-info">Guardar</button>
@@ -133,27 +133,19 @@ $(document).ready(function(){
 <?php 
 
 
-if (isset($_POST['nomGra']) && isset($_POST['txtPass'])) {
-  
-  $cont=$_GET['txtPass'];
-  $data = "http://localhost:8080/SiaApi/granja.php?txtNomGra".$txtNomGra;
-  $usu=$_GET['txtUsuario'];
+if ($_POST['nomGra']!=""&& $_POST['ubiGra']!=""&&$_POST['idTipGraPer']!="") {
+  $nomGra = $_POST['nomGra'];
+  $ubiGra = $_POST['ubiGra'];
+  $idTipGraPer = $_POST['idTipGraPer'];
 
-
-  for($i=0;$i<count($data); $i++){
-    
-    if ($data[$i]["conUsu"]==$cont && $data[$i]["emaUsu"]==$usu ) {
-    
-      $_SESSION['session_username']=$usu;
-
-      /* Redireccionar el navegador */
-      header("Location: dashboard");
-      die();
-    }
-  break;
-  }
-
+	$url = "http://localhost:8080/siaApi/granja.php?nomGra=".$nomGra."&idTipGraPer=".$idTipGraPer."&ubiGra=".$ubiGra;
+	
+	$granja = curl_init($url);
+	curl_setopt($granja,CURLOPT_RETURNTRANSFER,true);
+	$response = curl_exec($granja);
+	
+	$result = json_decode($response);
+	
+print_r($result);
 }
-
-
 ?>
