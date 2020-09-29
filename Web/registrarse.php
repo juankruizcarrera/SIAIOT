@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
-  <form method="post" id="regiration_form" novalidate>
+  <form  id="regiration_form" method="post"  action="registro.php" novalidate>
  
     <div class="form-body" >
    
@@ -56,9 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       <h2>Datos del Usuario</h2>
       
         <input type="text"  id="txtNom" name="txtNom" placeholder="NOMBRE(s)"/>
-        <input type="text"  id="txtApe" name="txtApe" placeholder="APELLIDO(s)"/>
-        <input type="text"  id="txtCorreo" name="txtCorreo" placeholder="CORREO"/>
-        <input type="password" id="txtPass" name="txtPass" placeholder="CONTRASEÑA"/>
+        <input type="text"  id="txtApe" name="txtApe" placeholder="APELLIDO(s)" />
+        <input type="text"  id="txtCorreo" name="txtCorreo" placeholder="CORREO" />
+        <input type="password" id="txtPass" name="txtPass" placeholder="CONTRASEÑA" />
         
           <button type="button" name="next" class="next btn btn-info">Siguiente</button>
       </fieldset>
@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
           <h4 >Marque la ubicación de la granja </h4>
           <div id="map"></div>
           <br>
-          <input type="text"  id="nomGra" name="nomGra" placeholder="NOMBRE GRANJA"/>
-          <select class="custom-select orderby" id="idTipGraPer"name="idTipGraPer" >
+          <input type="text"  id="nomGra" name="nomGra" placeholder="NOMBRE GRANJA" required/>
+          <select class="custom-select orderby" id="idTipGraPer"name="idTipGraPer" required >
           <option selected > SELECCIONE TIPO GRANJA</option>
             <?php
              for($i=0;$i<count($tipoGran); $i++){
@@ -83,14 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
           <input type="hidden"  id="ubiGra" name="ubiGra"/>
          <br>
           <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
-          <button type="submit" name="" class=" btn btn-info">Guardar</button>
+          <button type="submit" name="" class=" btn btn-info" onclick= "">Guardar</button>
           </fieldset>
 
         
     </div>
     
   </form>
-
+  <div id="json_response"></div>
     </div>
   </div>
  
@@ -127,25 +127,7 @@ $(document).ready(function(){
 			.html(percent+"%");
 	}
 });
-
-
 </script>
-<?php 
 
 
-if ($_POST['nomGra']!=""&& $_POST['ubiGra']!=""&& $_POST['idTipGraPer']!="") {
-  $nomGra = $_POST['nomGra'];
-  $ubiGra = $_POST['ubiGra'];
-  $idTipGraPer = $_POST['idTipGraPer'];
 
-	$url = "http://localhost:8080/siaApi/granja.php?nomGra=".$nomGra."&idTipGraPer=".$idTipGraPer."&ubiGra=".$ubiGra;
-	
-	$granja = curl_init($url);
-	curl_setopt($granja,CURLOPT_RETURNTRANSFER,true);
-	$response = curl_exec($granja);
-	
-	$result = json_decode($response);
-	
-  print_r($result);
-}
-?>

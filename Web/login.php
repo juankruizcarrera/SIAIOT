@@ -45,8 +45,8 @@ if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
         <h2>INICIO DE SESIÓN</h2>
       </div>
       <div class="form-body">
-        <input type="text"  id="txtUsuario" name="txtUsuario" placeholder="INGRESE USUARIO" />
-        <input type="password" id="txtPass" name="txtPass" placeholder="INGRESE SU CLAVE" />
+        <input type="text"  id="txtUsuario" name="txtUsuario" placeholder="INGRESE USUARIO" required />
+        <input type="password" id="txtPass" name="txtPass" placeholder="INGRESE SU CLAVE" required/>
       </div>
       <div class="form-footer">
         <button type="submit">INGRESAR</button>
