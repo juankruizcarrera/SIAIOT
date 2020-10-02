@@ -33,7 +33,7 @@ function initMap() {
               coordenadas += lat + ',' + lon + ':';
            });
        }
-       document.getElementById("ubiGra").value = coordenadas;
+      // document.getElementById("ubiGra").value = coordenadas;
     
 });
 }

@@ -19,7 +19,7 @@ if(!isset($_SESSION["session_username"])) {
   <?php include("includesDashboard/referencias.php"); ?>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap&libraries=drawing" defer ></script>
-
+  <script src="dist/js/pages/mapa.js"></script>
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -42,7 +42,9 @@ if(!isset($_SESSION["session_username"])) {
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard 
+
+              </li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

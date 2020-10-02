@@ -3,6 +3,36 @@ session_start();
 if(!isset($_SESSION["session_username"])) {
     header("Location: ../login.php");
 }else{
+//Consumo de la Api de Granja y Usuario 
+  $id=$_SESSION["session_username"];
+  $usuario = json_decode(file_get_contents("http://localhost:8080/SiaApi/usuario.php?id=$id"),true);
+  $idGraPer=$usuario[0]["idGraPer"];
+  $granja = json_decode(file_get_contents("http://localhost:8080/SiaApi/granja.php?id=$idGraPer"),true);
+  
+
+  $url = 'http://localhost:8080/siaApi/tablasSatelites/tipoDocumento.php';
+if (isset($_GET['idTipDoc'])) {
+  $idSelecionado= $_GET['idTipDoc'];
+
+  $datos = array('idTipDoc' => $idSelecionado);
+  $options = array(
+      'http' => array(
+          'header'  => "Content-type: application/json\r\n",
+          'method'  => 'DELETE',
+          'content' => json_encode($datos),
+      ),
+  );
+  
+  # Preparar petición
+  $contexto = stream_context_create($options);
+  # Hacerla
+  $resultado = file_get_contents($url, false, $contexto);
+  if ($resultado === true) {
+    header('Location: tipoDocumento.php');
+    die;
+  }
+  
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,17 +40,14 @@ if(!isset($_SESSION["session_username"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SIA | Tipo Documento</title>
-
   <?php include("includesDashboard/referencias.php"); ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 <!-- Navbar -->
   <?php include("includesDashboard/navbar.php"); ?>
-
   <!-- Main Sidebar Container -->
   <?php include("includesDashboard/sidebar.php");?>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,7 +55,7 @@ if(!isset($_SESSION["session_username"])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h1 class="m-0 text-dark"><?php echo $granja[0]["nomGra"];?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -61,6 +88,7 @@ if(!isset($_SESSION["session_username"])) {
             </button>
           </div>
         </div>
+       
         <div class="card-body p-0">
           <table class="table table-striped projects">
               <thead>
@@ -95,23 +123,23 @@ if(!isset($_SESSION["session_username"])) {
                         </a>
                         <br/>
                         <small>
-                        <!-- perfil -->
+                        
                         </small>
                     </td>
                     <td class="project-actions text-right">
                        
-                        <a class="btn btn-info btn-sm" href="#">
+                        <a class="btn btn-info btn-sm"  href="editTipoDocumento.php?idSelec=<?php echo $data[$i]["idTipDoc"]; ?>">
                             <i class="fas fa-pencil-alt">
                             </i>
                             Editar
                         </a>
-                        <a class="btn btn-danger btn-sm"  href="#"  onclick="EliminarTipoDocumento()">
+                        <a class="btn btn-danger btn-sm"   href="tipoDocumento.php?idTipDoc=<?php echo $data[$i]["idTipDoc"]; ?>">
                             <i class="fas fa-trash">
                             </i>
                             Eliminar
                         </a>
                        
-                        <input   class="btn btn-danger btn-sm" type="button" value="Eliminar" onclick="EliminarTipoDocumento()" >
+                        
                     </td>
                    </tr>
                   <?php
@@ -123,6 +151,7 @@ if(!isset($_SESSION["session_username"])) {
               </tbody>
           </table>
         </div>
+       
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
@@ -146,33 +175,18 @@ if(!isset($_SESSION["session_username"])) {
 
 <?php
 }
-$url = 'http://localhost:8080/siaApi/tablasSatelites/tipoDocumento.php';
-function EliminarTipoDocumento(){
+?>
 
- echo "hola";
-  $datos = array('idTipDoc' => $idSelecionado);
-  $options = array(
-      'http' => array(
-          'header'  => "Content-type: application/json\r\n",
-          'method'  => 'DELETE',
-          'content' => json_encode($datos),
-      ),
-  );
-   print_r(json_encode($datos));
-  # Preparar petición
-  $contexto = stream_context_create($options);
-  # Hacerla
-  $resultado = file_get_contents($url, false, $contexto);
-  if ($resultado === false) {
-      echo "Error haciendo petición";
-      
-      exit;
-  }else{
-      header("location:tipoDocumento.php");
-      # si no salimos allá arriba, todo va bien
-      var_dump($resultado);
-  
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+	<script> //metodo para enviar los datos del html por el metodo post para que el php los tome
+	  function submit_soap(){
+		var key1=$("#key1").val();
+		var key2=$("#key2").val();
+		$.post("form_post.php",{key1:key1,key2:key2},
+		function(data){
+		  $("#json_response").html(data);
+		});
   }
   
-}
-?>
+ 
+	</script>

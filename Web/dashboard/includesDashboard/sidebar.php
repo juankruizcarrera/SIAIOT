@@ -40,7 +40,7 @@ $usuario = json_decode(file_get_contents("http://localhost:8080/SiaApi/usuario.p
               <li class="nav-item">
                 <a href="./index.php" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Dashboard</p>
                 </a>
               </li>
               
@@ -64,7 +64,7 @@ $usuario = json_decode(file_get_contents("http://localhost:8080/SiaApi/usuario.p
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="areaCultivo.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Area de Cultivo</p>
                 </a>

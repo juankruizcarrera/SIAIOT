@@ -3,12 +3,10 @@ session_start();
 if(!isset($_SESSION["session_username"])) {
     header("Location: ../login.php");
 }else{
+    $idSelec=$_GET['idSelec'];
 
- 
-  $id=$_SESSION["session_username"];
-  $usuario = json_decode(file_get_contents("http://localhost:8080/SiaApi/usuario.php?id=$id"),true);
-  $idGraPer=$usuario[0]["idGraPer"];
-  $granja = json_decode(file_get_contents("http://localhost:8080/SiaApi/granja.php?id=$idGraPer"),true);
+  
+  
  
 ?>
 <!DOCTYPE html>
@@ -35,7 +33,7 @@ if(!isset($_SESSION["session_username"])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark"><?php echo $granja[0]["nomGra"];?></h1>
+            <h1 class="m-0 text-dark">Dashboard </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -81,7 +79,7 @@ if(!isset($_SESSION["session_username"])) {
                 <div class="card-body">
                 <div class="form-group">
                     <label for="idTipDoc">IdTipoDoc</label>
-                    <input type="text" class="form-control" id="idTipDoc" name="idTipDoc" placeholder="Id Tipo Documento">
+                    <input type="text" class="form-control" id="idTipDoc" name="idTipDoc" placeholder="Id Tipo Documento" value="<?php echo $idSelec;?>">
                     </div>
                     <div class="form-group">
                     <label for="nomTipDoc">Nombre Tipo Documento</label>
@@ -114,42 +112,34 @@ if(!isset($_SESSION["session_username"])) {
 </html>
 
 <?php
-if (isset($_POST['idTipDoc'])&&isset($_POST['nomTipDoc']) ) {
- 
-  $idTipDoc=$_POST['idTipDoc'];
-  $nomTipDoc=$_POST['nomTipDoc'];
-  $url = 'http://localhost:8080/siaApi/tablasSatelites/tipoDocumento.php';
-  $data = array('idTipDoc' => $idTipDoc, 'nomTipDoc' => $nomTipDoc);
-  $options = array(
-      'http' => array(
-          'header'  => "Content-type: application/json\r\n",
-          'method'  => 'POST',
-          'content' => json_encode($data),
-      ),
-  );
-  
-  # Preparar petición
-  $contexto = stream_context_create($options);
-  # Hacerla
-  $resultado = file_get_contents($url, false, $contexto);
-  if ($resultado === true) {
-    header('Location: dashboard/tipoDocumento.php');
-    die;
-    echo "<script> window.location='tipoDocumento.php'; </script>";
-  }
-   
-  }
+if(isset($_POST['idTipDoc'])&&isset($_POST['nomTipDoc']) ) {
 
+    $idTipDoc=$_POST['idTipDoc'];
+    $nomTipDoc=$_POST['nomTipDoc'];
+    $url = 'http://localhost:8080/siaApi/tablasSatelites/tipoDocumento.php';
+    $data = array('idTipDoc' => $idTipDoc, 'nomTipDoc' => $nomTipDoc);
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'PUT',
+            'content' => json_encode($data),
+        ),
+    );
+    
+    # Preparar petición
+    $contexto = stream_context_create($options);
+    # Hacerla
+    $resultado = file_get_contents($url, false, $contexto);
+    if ($resultado === true) {
+      header('Location: dashboard/tipoDocumento.php');
+      die;
+      echo "<script> window.location='tipoDocumento.php'; </script>";
+    }
+     
+    }
 
 
 }
 
-  
-
-  
-
-
-
-  
 ?>
 
