@@ -9,6 +9,133 @@ if(!isset($_SESSION["session_username"])) {
     $idGraPer=$usuario[0]["idGraPer"];
     $granja = json_decode(file_get_contents("http://localhost:8080/SiaApi/granja.php?id=$idGraPer"),true);
     $UbiGran=$granja[0]["ubiGra"];
+
+
+   
+   $unidades =json_decode(file_get_contents("http://localhost:8080/siaApi/tablasSatelites/unidades.php"),true);
+
+//Borrar 
+$url = 'http://localhost:8080/siaApi/areaCultivo.php';
+if (isset($_GET['idAreCul'])) {
+  $idSelecionado= $_GET['idAreCul'];
+
+  $datos = array('idAreCul' => $idSelecionado);
+  $options = array(
+      'http' => array(
+          'header'  => "Content-type: application/json\r\n",
+          'method'  => 'DELETE',
+          'content' => json_encode($datos),
+      ),
+  );
+  
+  # Preparar petición
+  $contexto = stream_context_create($options);
+  # Hacerla
+  $resultado = file_get_contents($url, false, $contexto);
+  if ($resultado === true) {
+   /*  header('Location: tipoSuelo.php');
+    die; */
+  }
+  unset($_GET['idAreCul']); 
+}
+////////////editar
+
+if (isset($_GET['idSelec']) ) {
+
+if (isset($_POST['idAreCul'])&& $_POST['idAreCul']!=0) {
+  if ($_GET['idSelec']==$_POST['idAreCul']) {
+    if(isset($_POST['idAreCul'])&&isset($_POST['nomAre'])&&isset($_POST['ubiAreCul'])&&isset($_POST['areAreCul'])&&isset($_POST['obsAreCul'])&&isset($_POST['idGraPer'])&&isset($_POST['idUniPer']) ) {
+
+      $idAreCul=$_POST['idAreCul'];
+      $nomAre=$_POST['nomAre'];
+      $ubiAreCul=$_POST['ubiAreCul'];
+      $areAreCul=$_POST['areAreCul'];
+      $obsAreCul=$_POST['obsAreCul'];
+      $idGraPer=$_POST['idGraPer'];
+      $idUniPer=$_POST['idUniPer'];
+
+     
+      $data = array('idAreCul' => $idAreCul, 'nomAre' => $nomAre,'ubiAreCul' => $ubiAreCul,'areAreCul'=>$areAreCul,'obsAreCul'=>$obsAreCul,'idGraPer' => $idGraPer,'idUniPer'=>$idUniPer);
+      $options = array(
+          'http' => array(
+              'header'  => "Content-type: application/json\r\n",
+              'method'  => 'PUT',
+              'content' => json_encode($data),
+          ),
+      );
+      # Preparar petición
+      $contexto = stream_context_create($options);
+      # Hacerla
+      $resultado = file_get_contents($url, false, $contexto);
+      if ($resultado === true) {
+      
+      }
+ 
+      }
+      unset($_GET['idSelec']); 
+  }
+}else{
+      /////////Guardar
+
+if (isset($_POST['nomAre'])&&isset($_POST['ubiAreCul'])&&isset($_POST['areAreCul'])&&isset($_POST['obsAreCul'])&&isset($_POST['idGraPer'])&&isset($_POST['idUniPer']) ) {
+  $nomAre=$_POST['nomAre'];
+  $ubiAreCul=$_POST['ubiAreCul'];
+  $areAreCul=$_POST['areAreCul'];
+  $obsAreCul=$_POST['obsAreCul'];
+  $idGraPer=$_POST['idGraPer'];
+  $idUniPer=$_POST['idUniPer'];
+
+  $data = array('nomAre' => $nomAre,'ubiAreCul' => $ubiAreCul,'areAreCul'=>$areAreCul,'obsAreCul'=>$obsAreCul,'idGraPer' => $idGraPer,'idUniPer'=>$idUniPer);
+$options = array(
+    'http' => array(
+        'header'  => "Content-type: application/json\r\n",
+        'method'  => 'POST',
+        'content' => json_encode($data),
+    ),
+);
+
+# Preparar petición
+$contexto = stream_context_create($options);
+# Hacerla
+$resultado = file_get_contents($url, false, $contexto);
+
+ 
+}
+}
+
+}else {
+    
+/////////Guardar
+if (isset($_POST['idAreCul'])&&$_POST['idAreCul']==0) {
+  if (isset($_POST['nomAre'])&&isset($_POST['ubiAreCul'])&&isset($_POST['areAreCul'])&&isset($_POST['obsAreCul'])&&isset($_POST['idGraPer'])&&isset($_POST['idUniPer']) ) {
+    $nomAre=$_POST['nomAre'];
+    $ubiAreCul=$_POST['ubiAreCul'];
+    $areAreCul=$_POST['areAreCul'];
+    $obsAreCul=$_POST['obsAreCul'];
+    $idGraPer=$_POST['idGraPer'];
+    $idUniPer=$_POST['idUniPer'];
+  
+    $data = array('nomAre' => $nomAre,'ubiAreCul' => $ubiAreCul,'areAreCul'=>$areAreCul,'obsAreCul'=>$obsAreCul,'idGraPer' => $idGraPer,'idUniPer'=>$idUniPer);
+  $options = array(
+      'http' => array(
+          'header'  => "Content-type: application/json\r\n",
+          'method'  => 'POST',
+          'content' => json_encode($data),
+      ),
+  );
+  
+  # Preparar petición
+  $contexto = stream_context_create($options);
+  # Hacerla
+  $resultado = file_get_contents($url, false, $contexto);
+  
+   
+  }
+}
+
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -86,7 +213,7 @@ if(!isset($_SESSION["session_username"])) {
             <div class="col-md-12">
             <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">General</h3>
+              <h3 class="card-title">Nueva Área de Cultivo</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -95,7 +222,62 @@ if(!isset($_SESSION["session_username"])) {
               </div>
             </div>
             <div class="card-body" >
+        
+            <input type="hidden" name="ubiGra" id="ubiGra" value="<?php echo $UbiGran; ?>">
+            <form action="" method= "post">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="idAreCul">Id</label>
+                    <input type="text" class="form-control" id="idAreCul" name="idAreCul" placeholder="Id Área" readonly value="<?php if (isset($_GET['idSelec'])) {
+                     $idSelec=$_GET['idSelec'];
+                     echo $idSelec;
+                    }else{
+                        echo 0;
+                    } ?>">
+                </div>
+                <div class="form-group">
+                    <label for="nomAre">Nombre</label>
+                    <input type="text" class="form-control" id="nomAre"  name="nomAre" placeholder="Nombre del Área"required>
+                </div>
+                <div class="form-group">
+                    <label for="obsAreCul">Observaciones</label>
+                    <input type="textarea" class="form-control" id="obsAreCul"  name="obsAreCul" placeholder="Observaciones"required>
+                </div>
+                <div class="form-group">
+                    <label for="areAreCul">Área</label>
+                    <input type="number" class="form-control" id="areAreCul"  name="areAreCul" placeholder="Área"required>
+                </div>
+                <div class="form-group">
+                
+              
+               
+                <label for="idUniPer">Unidad de Medida</label>
+                <select class="form-control" name="idUniPer" id="idUniPer">
+                <?php
+                for($i=0;$i<count($unidades); $i++){
+                  ?>
+                <option value="<?php echo $unidades[$i]["idUni"]; ?>"><?php echo $unidades[$i]["nomUni"]; ?></option>
+                <?php
+              } 
+              ?>
+                </select>
+                    
+                   
+                </div>
+            </div>
+            <input type="hidden" name="ubiAreCul" id="ubiAreCul" >
+            <input type="hidden" name="idGraPer" id="idGraPer" value="<?php echo $idGraPer; ?>">
+ 
+        
+
+                <!-- /.card-body -->
+                <label for="nomTipDoc">Dibuje el Área</label>
              <div id="map"style="height: 350px; width: 100%;"> </div>
+             
+             <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" >Guardar</button>
+                </div>
+             </form>
             </div>
             <!-- /.card-body -->
           </div>
@@ -104,7 +286,7 @@ if(!isset($_SESSION["session_username"])) {
             <div class="col-md-12">
             <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">Files</h3>
+              <h3 class="card-title">Áreas</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -116,59 +298,33 @@ if(!isset($_SESSION["session_username"])) {
               <table class="table">
                 <thead>
                   <tr>
-                    <th>File Name</th>
-                    <th>File Size</th>
+                    <th>Nombre</th>
+                    <th>Obs</th>
+                    <th>Área</th>
+                    <th>Unidad</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-
+              <?php
+              $areaCultivo=json_decode(file_get_contents("http://localhost:8080/siaApi/areaCultivo.php?idGraPer=$idGraPer"),true);
+              for($i=0;$i<count($areaCultivo); $i++){
+              ?>
                   <tr>
-                    <td>Functional-requirements.docx</td>
-                    <td>49.8005 kb</td>
+                    <td><?php echo $areaCultivo[$i]['nomAre'];?></td>
+                    <td><?php echo $areaCultivo[$i]['areAreCul']; ?></td>
+                    <td><?php echo $areaCultivo[$i]['obsAreCul']; ?></td>
+                    <td><?php echo $areaCultivo[$i]['idUniPer']; ?></td>
                     <td class="text-right py-0 align-middle">
                       <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="areaCultivo.php?idSelec=<?php echo $areaCultivo[$i]["idAreCul"];?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                        <a href="areaCultivo.php?idAreCul=<?php echo $areaCultivo[$i]["idAreCul"];?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                       </div>
                     </td>
-                  <tr>
-                    <td>UAT.pdf</td>
-                    <td>28.4883 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td>Email-from-flatbal.mln</td>
-                    <td>57.9003 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td>Logo.png</td>
-                    <td>50.5190 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-                  <tr>
-                    <td>Contract-10_12_2014.docx</td>
-                    <td>44.9715 kb</td>
-                    <td class="text-right py-0 align-middle">
-                      <div class="btn-group btn-group-sm">
-                        <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      </div>
-                    </td>
-
+                  </tr>
+      <?php 
+ }            
+?>
                 </tbody>
               </table>
             </div>
@@ -181,12 +337,7 @@ if(!isset($_SESSION["session_username"])) {
           <!-- /.card -->
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <a href="#" class="btn btn-secondary">Cancel</a>
-          <input type="submit" value="Save Changes" class="btn btn-success float-right">
-        </div>
-      </div>
+     
     </section>
     <!-- /.content -->
   </div>

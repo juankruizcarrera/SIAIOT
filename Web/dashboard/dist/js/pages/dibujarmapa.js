@@ -1,13 +1,13 @@
 "use strict";
   var coordenadas =''; 
+  
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=drawing">
 function initMap() {
+  var ubiGra= document.getElementById("ubiGra").value;
+    var coords = ubiGra.split(" ",2);
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: {
-      lat: -34.397,
-      lng: 150.644
-    },
-    zoom: 8
+    zoom: 40,
+    center:  new google.maps.LatLng(coords[0], coords[1]), /* coords[0]= latitud  coords[1]= longitud*/
   });
   const drawingManager = new google.maps.drawing.DrawingManager({
    
@@ -33,7 +33,8 @@ function initMap() {
               coordenadas += lat + ',' + lon + ':';
            });
        }
-      // document.getElementById("ubiGra").value = coordenadas;
+      document.getElementById("ubiAreCul").value = coordenadas;
     
 });
+
 }

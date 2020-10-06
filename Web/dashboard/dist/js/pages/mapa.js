@@ -2,10 +2,8 @@ let marker;
 
 initMap=function() {
     var ubiGra= document.getElementById("ubiGra").value;
-    coords = ubiGra.split(" ",2);
+    coords = ubiGra.split(" ",2); //separando por el espacio 
       setMap(coords); 
-     
-    
 }
 function setMap(coords){
     
