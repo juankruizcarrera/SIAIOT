@@ -3,17 +3,6 @@ setRegistro
 
 require_once dirname( __DIR__ ).'/Conexion/conexion.php';
 
-function getGranja(){
-    $Query = "select * from granja";
-    $Respuesta = Obtener($Query);
-    return json_encode(ConvertirUTF8($Respuesta));
-}
-
-function getGranjaId($id){
-    $Query = "select * from granja where idGra = $id";
-    $Respuesta = Obtener($Query);
-    return json_encode(ConvertirUTF8($Respuesta));
-}
 function setRegistro($array){
     $nomGra= $array['nomGra'];
     $ubiGra=$array['ubiGra'];
@@ -22,7 +11,6 @@ function setRegistro($array){
 $Query = "insert into granja(ubiGra,nomGra,idTipGraPer) values('$ubiGra','$nomGra',$idTipGraPer)";
 
 $idGraPer = InsertDeleteUpdate($Query);
-
 $conUsu = $array['conUsu'];
 $nomUsu = $array['nomUsu'];
 $emaUsu = $array['emaUsu'];
