@@ -51,11 +51,7 @@ if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
       <div class="form-footer">
         <button type="submit">INGRESAR</button>
       </div>
-     
-     
-        
-     
-      <div class="form-footer"style="color:#fff;">
+      <div class="form-footer"style="color:#cb3234;">
         <label for=""><?php echo $mensaje ?></label>
         <br>
         <h4>¿No posee una cuenta?</h4>

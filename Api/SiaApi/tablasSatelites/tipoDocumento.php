@@ -1,13 +1,13 @@
 <?php
 //echo dirname( __FILE__ );
-require_once (dirname(__FILE__).'/Datos/datosUsuario.php');
+require_once (dirname(__DIR__).'/DatosTablasSatelite/datosTipoDocumento.php');
 switch ($_SERVER['REQUEST_METHOD']) {
   case 'GET':
       if(isset($_GET['id'])) {
       
-          print_r(getUsuariosId($_GET['id']));
+          print_r(getTipoDocumentoId($_GET['id']));
       }else{
-          print_r(getUsuarios());
+          print_r(getTipoDocumento());
       }
       break;
       case 'POST':
@@ -17,7 +17,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
     
             if (json_last_error()==0) {
-               $ultimoId=setUsuarios($conver);  
+               $ultimoId=setTipoDocumento($conver);  
                print_r(json_encode($ultimoId));
                  http_response_code(200);
             }else{
@@ -33,7 +33,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
     
             if (json_last_error()==0) {
-               $ultimoId=putUsuarios($conver);  
+               $ultimoId=putTipoDocumento($conver);  
                print_r(json_encode($ultimoId));
                  http_response_code(200);
             }else{
@@ -49,7 +49,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
     
             if (json_last_error()==0) {
-               $ultimoId=deleteUsuarios($conver);  
+               $ultimoId=deleteTipoDocumento($conver);  
                print_r(json_encode($ultimoId));
                  http_response_code(200);
             }else{

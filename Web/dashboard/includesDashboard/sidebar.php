@@ -94,37 +94,37 @@ $usuario = json_decode(file_get_contents("http://localhost:8080/SiaApi/usuario.p
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="tipoRendimiento.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipo Rendimiento</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="tipoSuelo.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipo de suelo</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="tipoCultivo.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipo de Cultivo</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="estados.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Estados</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="tipoRecursos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipo de recursos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarios.php" class="nav-link">
+                <a href="unidadesMedida.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Unidades de Medida</p>
                 </a>

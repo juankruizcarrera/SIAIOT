@@ -10,9 +10,13 @@ body{
 
 .login-page{
 	background-image: url("../images/Agricultura.jpg");
+	background-image: no-repeat;
+	background-image: fixed;
+	background-image: center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
 	background-size: cover;
-	height: 100vh;
-	position: relative;
 }
 .login-page:after{
 content: '';
@@ -21,7 +25,7 @@ left: 0px;
 top: 0px;
 height: 100%;
 width: 100%;
-background-color: rgba(0,0,0,.5);
+background-color: #fcfcdc;
 z-index: 1;
 }
 .login-page .box{
@@ -31,7 +35,7 @@ z-index: 1;
 	transform: translate(-50%,-50%);
 	display: flex;
 	flex-direction: column;
-	width: 500px;
+	width: 300px;
 
 	z-index: 2;
 }
@@ -39,17 +43,17 @@ z-index: 1;
 .login-page .box .form-head h2{
 text-align: center;
 margin:10px 0px 20px;
-color:#ffffff;
+color:#0e0d0d;
 }
 .login-page .box .form-body h2{
 	text-align: center;
 	margin:10px 0px 20px;
-	color:#ffffff;
+	color:#0c0c0c;
 	}
 	.login-page .box .form-body h4{
 		text-align: center;
 		margin:10px 0px 20px;
-		color:#ffffff;
+		color:#0a0a0a;
 		}
 .login-page .box .form-body{
 display: flex;
@@ -58,23 +62,23 @@ flex-direction: column;
 .login-page .box .form-body input{
 height: 40px;
 margin-bottom: 20px;
-border:1px solid #ffffff;
+border:1px solid #111111;
 width: 100%;
 background-color: transparent;
 border-radius: 20px;
 text-align: center;
-color:#ffffff;
+color:#111111;
 transition:box-shadow .5s ease;
 }
 .login-page .box .form-body .custom-select {
 	height: 40px;
 	margin-bottom: 20px;
-	border:1px solid #ffffff;
+	border:1px solid #0a0a0a;
 	width: 100%;
 	background-color: transparent;
 	border-radius: 20px;
 	text-align: center;
-	color:#ffffff;
+	color:#070707;
 	transition:box-shadow .5s ease;
 	}
 
@@ -82,7 +86,7 @@ transition:box-shadow .5s ease;
 	box-shadow: 0px 0px 10px black;
 }
 .login-page .box .form-body input::placeholder{
-	color:#ffffff;
+	color:#000000;
 	}
 
 .login-page .box .form-footer {
@@ -100,8 +104,8 @@ transition:box-shadow .5s ease;
 	height: 40px;
 	border-radius: 20px;
 	padding: 0px 50px;
-	color:#ffffff;
-	background-color: #f44336;
+	color:#000000;
+	background-color: #bcf4cc;
 	border:none;
 	cursor: pointer;
 	transition:box-shadow .5s ease;
@@ -110,6 +114,116 @@ transition:box-shadow .5s ease;
 	box-shadow: 0px 0px 10px black;
 }
 
+/* Registro */
+
+.register-page{
+	background-image: url("../images/Agricultura.jpg");
+	
+	background-image: no-repeat;
+	background-image: fixed;
+	background-image: center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.register-page:after{
+content: '';
+position: absolute;
+left: 0px;
+top: 0px;
+height: 100%;
+width: 100%;
+background-color: #fcfcdc;
+z-index: 1;
+}
+.register-page .box{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	display: flex;
+	flex-direction: column;
+	width: 500px;
+
+	z-index: 2;
+}
+
+.register-page .box .form-head h2{
+text-align: center;
+margin:10px 0px 20px;
+color:#0e0d0d;
+}
+.register-page .box .form-body h2{
+	text-align: center;
+	margin:10px 0px 20px;
+	color:#0c0c0c;
+	}
+	.register-page .box .form-body h4{
+		text-align: center;
+		margin:10px 0px 20px;
+		color:#0a0a0a;
+		}
+.register-page .box .form-body{
+display: flex;
+flex-direction: column;
+}
+.register-page .box .form-body input{
+height: 40px;
+margin-bottom: 20px;
+border:1px solid #111111;
+width: 100%;
+background-color: transparent;
+border-radius: 20px;
+text-align: center;
+color:#111111;
+transition:box-shadow .5s ease;
+}
+.register-page .box .form-body .custom-select {
+	height: 40px;
+	margin-bottom: 20px;
+	border:1px solid #0a0a0a;
+	width: 100%;
+	background-color: transparent;
+	border-radius: 20px;
+	text-align: center;
+	color:#070707;
+	transition:box-shadow .5s ease;
+	}
+
+.register-page .box .form-body input:focus{
+	box-shadow: 0px 0px 10px black;
+}
+.register-page .box .form-body input::placeholder{
+	color:#000000;
+	}
+
+.register-page .box .form-footer {
+		text-align: center;
+
+	}
+
+
+.register-page .box .form-footer {
+				text-align: center;
+		
+			}
+.register-page .box .form-footer button{
+
+	height: 40px;
+	border-radius: 20px;
+	padding: 0px 50px;
+	color:#000000;
+	background-color: #bcf4cc;
+	border:none;
+	cursor: pointer;
+	transition:box-shadow .5s ease;
+}
+.register-page .box .form-footer button:hover{
+	box-shadow: 0px 0px 10px black;
+}
+
+	
 #regiration_form fieldset:not(:first-of-type) {
     display: none;
   }
@@ -127,7 +241,7 @@ height: 70%;
 text-align-last: center;
 }
 h4{
-color:#ffffff;
+color:#000000;
 }
 
 

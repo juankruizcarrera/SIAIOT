@@ -28,12 +28,12 @@ function Obtener($sqlstr, $conexion = null){
 function InsertDeleteUpdate($sqlstr, $conexion = null){
     if(!$conexion)global $conexion;
     $result = $conexion ->query($sqlstr);
-    return $conexion -> affected_rows;
-   
+  /*  return $conexion -> affected_rows;  */
+   return mysqli_insert_id($conexion);
     }
 
 
-//granja
+
 
 
 //transforma a utf-8

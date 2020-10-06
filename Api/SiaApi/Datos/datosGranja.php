@@ -13,17 +13,29 @@ function getGranjaId($id){
     $Respuesta = Obtener($Query);
     return json_encode(ConvertirUTF8($Respuesta));
 }
-function setUsuarios($UbiGra,$nomGra,$idTipGraPe){
-$Query = "insert into granja(UbiGra,nomGra,idTipGraPer) values('$UbiGra','$nomGra',$idTipGraPe)";
+function setGranja($array){
+
+        $nomGra= $array['nomGra'];
+        $ubiGra=$array['ubiGra'];
+        $idTipGraPer=$array['idTipGraPer'];
+ 
+  
+   
+$Query = "insert into granja(ubiGra,nomGra,idTipGraPer) values('$ubiGra','$nomGra',$idTipGraPer)";
 
 return InsertDeleteUpdate($Query);
 }
-function putUsuarios($UbiGra,$nomGra,$idTipGraPe,$id){
-    $Query = "UPDATE granja SET UbiGra = '$UbiGra', nomGra = '$nomGra', idTipGraPe = $idTipGraPe WHERE idGra =$id ";
+function putGranja($array){
+    $id=$array['id'];
+    $nomGra= $array['nomGra'];
+    $ubiGra=$array['ubiGra'];
+    $idTipGraPer=$array['idTipGraPer'];
+    $Query = "UPDATE granja SET ubiGra = '$ubiGra', nomGra = '$nomGra', idTipGraPer = $idTipGraPer WHERE idGra =$id ";
     
     return InsertDeleteUpdate($Query);
     }
-function deleteUsuarios($id){
+function deleteGranja($array){
+    $id=$array['id'];
     $Query = "delete from granja where idGra = $id";
     return InsertDeleteUpdate($Query);
 }

@@ -11,43 +11,54 @@ switch ($_SERVER['REQUEST_METHOD']) {
       }
       break;
       case 'POST':
+       
+           $postBody = file_get_contents('php://input');
         
-            $conUsu = $_GET['conUsu'];
-            $nomUsu = $_GET['nomUsu'];
-            $emaUsu = $_GET['emaUsu'];
-            $fecCreUsu = $_GET['fecCreUsu'];
-            $idGraPer = $_GET['idGraPer'];
-            $var = setGranja($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer);
-           if ($var>0) {
-            echo "successful";
-           }else {
-            echo "No se guardo ";
-           }
+        $conver = json_decode($postBody,true);
+
+
+        if (json_last_error()==0) {
+           $ultimoId=setGranja($conver);  
+           print_r(json_encode($ultimoId));
+          
+             http_response_code(200);
+        }else{
+            http_response_code(400);
+            
+        }
+
         break;
         case 'PUT':
-            $id = $_GET['id'];
-            $conUsu = $_GET['conUsu'];
-            $nomUsu = $_GET['nomUsu'];
-            $emaUsu = $_GET['emaUsu'];
-            $fecCreUsu = $_GET['fecCreUsu'];
-            $idGraPer = $_GET['idGraPer'];
-            $var = putGranja($conUsu,$nomUsu,$emaUsu,$fecCreUsu,$idGraPer,$id);
-           if ($var>0) {
-            echo "successful";
-           }else {
-            echo "No se Actualizo ";
-           }
-               
+           
+            $postBody = file_get_contents('php://input');
+        
+        $conver = json_decode($postBody,true);
+        if (json_last_error()==0) {
+           $ultimoId=putGranja($conver);  
+           print_r(json_encode($ultimoId));
+      
+             http_response_code(200);
+        }else{
+            http_response_code(400);
+            
+        }
+
         break;
         case 'DELETE':
-            if(isset($_GET['id'])) {
-                $var = deleteUsuarios($_GET['id']);
-                if ($var>0) {
-                    echo "successful";
-                   }else {
-                    echo "No se elimino ";
-                   }
-            }
+             
+            $postBody = file_get_contents('php://input');
+        
+        $conver = json_decode($postBody,true);
+        if (json_last_error()==0) {
+           $ultimoId=deleteGranja($conver);  
+           print_r(json_encode($ultimoId));
+      
+             http_response_code(200);
+        }else{
+            http_response_code(400);
+            
+        }
+
         break;
 }
 ?>
