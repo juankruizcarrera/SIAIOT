@@ -23,7 +23,7 @@ if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
       header("Location: dashboard");
       die();
     }
-  break;
+
   }
 
 }
@@ -36,6 +36,7 @@ if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIA PLUS</title>
 <link rel="stylesheet" type="text/css" href="assets/css/stylelogin.css">
+<?php include "includes/referencias.php";?>
 </head>
 <body>
 <section class="login-page">
@@ -51,11 +52,11 @@ if (isset($_GET['txtUsuario']) && isset($_GET['txtPass'])) {
       <div class="form-footer">
         <button type="submit">INGRESAR</button>
       </div>
-      <div class="form-footer"style="color:#cb3234;">
+      <div class="form-footer">
         <label for=""><?php echo $mensaje ?></label>
         <br>
         <h4>¿No posee una cuenta?</h4>
-        <a href="registrarse.php" style="color:#fff;">Registrarse</a>
+        <a href="registrarse.php" style="color:#FF0000;">Registrarse</a>
       </div>
       
     </div>

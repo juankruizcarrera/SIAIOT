@@ -2,8 +2,14 @@
 $nomGra=$_POST['nomGra'];
 $ubiGra=$_POST['ubiGra'];
 $idTipGraPer=$_POST['idTipGraPer'];
-$url = 'http://localhost:8080/siaApi/granja.php';
-$data = array('nomGra' => $nomGra, 'ubiGra' => $ubiGra, 'idTipGraPer' => $idTipGraPer, 'conUsu'=>$conUsu);
+$idGruGraPer=$_POST['idGruGraPer'];
+$conUsu = $_POST['conUsu'];
+$nomUsu = $_POST['nomUsu'] .' '. $_POST['apeUsu'];
+$emaUsu = $_POST['emaUsu'];
+$idPerPer=1;/* adinimistrador es 1 */
+
+$url = 'http://localhost:8080/siaApi/registro.php';
+$data = array('nomGra' => $nomGra, 'ubiGra' => $ubiGra, 'idTipGraPer' => $idTipGraPer,'idGruGraPer'=>$idGruGraPer, 'conUsu'=>$conUsu,'nomUsu'=>$nomUsu,'emaUsu'=>$emaUsu,'idPerPer'=>$idPerPer);
 $options = array(
     'http' => array(
         'header'  => "Content-type: application/json\r\n",

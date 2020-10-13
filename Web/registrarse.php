@@ -6,7 +6,7 @@ if (isset($_SESSION["session_username"])) {
     header("Location: dashboard");
 }
 $tipoGran = json_decode(file_get_contents("http://localhost:8080/SiaApi/tipoGranja.php"), true);
-$grupoGranja= json_decode(file_get_contents("http://localhost:8080/SiaApi/grupoGranja.php"), true);
+
 $mensaje = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['txtNom']) && isset($_GET['txtApe']) && isset($_GET['txtApe']) && isset($_GET['txtCorreo']) && isset($_GET['txtPass']) && isset($_GET['txtUbi']) && isset($_GET['tipoGranja'])) {
@@ -25,20 +25,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIA PLUS</title>
 <link rel="stylesheet" type="text/css" href="assets/css/stylelogin.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
 
 <?php include "includes/referencias.php";?>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM2eJylOzv5YDNnL-zryPIogSIksXd_kI&callback=initMap&libraries=drawing" defer ></script>
   <script src="assets/js/ubicacion.js"></script>
-  
-  
+ 
+<script>
+$(document).ready(function(){
+$('#myModal').modal('toggle')
+});
+
+</script>
+
 </head>
 <body>
 
-<div class=" register-page"  >
+
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title" id="exampleModalLongTitle">Grupo de Granja</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+   <form method="post">
+      <h4>Si el grupo ya existe no es necesario que lo cree</h4>
+        <div class="form-group">
+        <label for="nomGruGra" class="col-form-label">Nombre del Grupo:</label>
+        <input style="color:#000000; border-color:rgb(150, 152, 154);border-radius: 20px;" type="text" class="form-control" id="nomGruGra" name="nomGruGra" />
+        </div>
+        <div class=" form-group">
+        <label for="obsGruGra" class="col-form-label">Observaciones:</label>
+        <textarea style="color:#000000;border-color:rgb(150, 152, 154);border-radius: 20px;" class="form-control" id="obsGruGra" name="obsGruGra"> </textarea>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Omitir</button>
+        <button type="submit" class="btn btn-primary"   onclick="submit_GrupoGranja()">Crear</button>
+        <div id="json_response"></div>
+      </div>
+      </form>
+        
+    
+     
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" register-page">
 
 <div class="box">
 
@@ -53,16 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
  
     <div class="form-body" >
    
-    <fieldset>
-      <h2>Grupo de Granja</h2>
-      <h2>Si el grupo ya existe no es necesario que lo cree</h2>
-        <input type="text"  id="nomGruGra" name="nomGruGra" placeholder="NOMBRE DEL GRUPO AL QUE PERTENECE LA GRANJA"/>
-        <input type="textarea"  id="obsGruGra" name="obsGruGra" placeholder="OBSERVACIONES" />
-  
-        <button type="button" name="next" class="next btn btn-info">Crear</button>
-          <button type="button" name="next" class="next btn btn-info">Omitir</button>
-      </fieldset>
       <fieldset>
+      
           <h2>Datos de la Granja</h2>
           <h4 >Mueva el marcador en la ubicación de la granja </h4>
           <div id="map"></div>
@@ -70,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
           <select class="custom-select orderby" id="idGruGraPer"name="idGruGraPer" required >
           <option selected >SELECCIONE AL GRUPO QUE PERTENECE </option>
             <?php
+            $grupoGranja= json_decode(file_get_contents("http://localhost:8080/SiaApi/grupoGranja.php"), true);
              for($i=0;$i<count($grupoGranja); $i++){
               ?> 
                <option  value="<?php echo $grupoGranja[$i]["idGruGra"]; ?>"><?php echo $grupoGranja[$i]["nomGruGra"]; ?></option>
@@ -91,21 +125,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         
           <input type="hidden"  id="ubiGra" name="ubiGra"/>
          <br>
-          <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
+          
           <button type="button" name="next" class="next btn btn-info">Siguiente</button>
           </fieldset>
 
           <fieldset>
       <h2>Datos del Usuario</h2>
       
-        <input type="text"  id="txtNom" name="txtNom" placeholder="NOMBRE(s)"/>
-        <input type="text"  id="txtApe" name="txtApe" placeholder="APELLIDO(s)" />
-        <input type="text"  id="txtCorreo" name="txtCorreo" placeholder="CORREO" />
-        <input type="password" id="txtPass" name="txtPass" placeholder="CONTRASEÑA" />
-        <input type="password" id="txtPassReppeat" name="txtPassReppeat" placeholder="REPETIR CONTRASEÑA" />
+        <input type="text"  id="nomUsu" name="nomUsu" placeholder="NOMBRE(s)" required/>
+        <input type="text"  id="apeUsu" name="apeUsu" placeholder="APELLIDO(s)" />
+        <input type="text"  id="emaUsu" name="emaUsu" placeholder="CORREO" />
+        <input type="password" id="conUsu" name="conUsu" placeholder="CONTRASEÑA" />
+        <input type="password" id="cfmPassword" name="cfmPassword" placeholder="REPETIR CONTRASEÑA" />
         
         <button   type="button"  name="previous" class="previous btn btn-default">Anterior</button>
-          <button type="submit" name="" class=" btn btn-info" onclick= "">Guardar</button>
+          <button type="submit" name="" class=" btn btn-info" >Guardar</button>
       </fieldset>
     </div>
     
@@ -121,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
 $(document).ready(function(){
+  
 	var current = 1,current_step,next_step,steps;
 	steps = $("fieldset").length;
 	$(".next").click(function(){
@@ -146,8 +181,21 @@ $(document).ready(function(){
 			.css("width",percent+"%")
 			.html(percent+"%");
 	}
+
+
 });
 </script>
 
+<script>
+	  function submit_GrupoGranja(){
+		var nomGruGra=$("#nomGruGra").val();
+		var obsGruGra=$("#obsGruGra").val();
+		$.post("guardarGrupoGranja.php",{nomGruGra:nomGruGra,obsGruGra:obsGruGra},
+    function(data){
+		  $("#json_response").html(data);
+		});
+	}
+
+  </script>
 
 

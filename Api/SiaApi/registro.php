@@ -11,8 +11,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 
         if (json_last_error()==0) {
-           $ultimoId=setRegistro($conver);  
-           
+           $ultimoId=setRegistro($conver);  //todos los datos del registro 
+           print_r(json_encode($ultimoId));
             http_response_code(200);
         }else{
             http_response_code(400);

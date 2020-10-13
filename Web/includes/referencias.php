@@ -14,7 +14,7 @@
     <!-- Responsive Stylesheet -->
     <link rel="stylesheet" href="assets/css/responsive.css">
 <!--jQuery-->
-    <script src="assets/js/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
     <!--Plugins-->
     <script src="assets/js/bootstrap.bundle.js"></script>
     <script src="assets/js/loaders.css.js"></script>
